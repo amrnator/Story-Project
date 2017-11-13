@@ -12,6 +12,8 @@ public class NarrativeActionEditor : Editor {
     SerializedProperty PrecondList;
     SerializedProperty PostcondList;
     SerializedProperty ConditionList;
+    SerializedProperty triggeredMethods;
+
     int ListSize;
 
     int precondChoice;
@@ -26,6 +28,7 @@ public class NarrativeActionEditor : Editor {
         PostcondList = GetTarget.FindProperty("postConditions");
         actionName = GetTarget.FindProperty("actionName");
         ConditionList = GetTarget.FindProperty("globalConditionList");
+        triggeredMethods = GetTarget.FindProperty("TriggeredMethods");
     }
 
     public override void OnInspectorGUI()
@@ -178,6 +181,8 @@ public class NarrativeActionEditor : Editor {
             EditorGUILayout.Space();
             EditorGUILayout.Space();
         }
+
+        EditorGUILayout.PropertyField(triggeredMethods);
 
         //Apply the changes to our list
         GetTarget.ApplyModifiedProperties();

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 /// Narrative delegate ties methods and events to the Narrative's condition list,
 /// The user specifies the conditions neccessary for a certain event to trigger. 
 /// </summary>
+
 [ExecuteInEditMode, System.Serializable]
 public class NarrativeDelegate : MonoBehaviour {
 

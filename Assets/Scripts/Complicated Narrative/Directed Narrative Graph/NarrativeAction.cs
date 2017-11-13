@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 /// <summary>
@@ -11,6 +12,8 @@ using System;
 /// if so, then it changes the conditionlist conditions to match those of the postconditions. 
 /// </summary>
 public class NarrativeAction : NarrativeEvent {
+
+    public UnityEvent TriggeredMethods;
 
     void Awake() {
         //get the condition list
@@ -48,7 +51,10 @@ public class NarrativeAction : NarrativeEvent {
         //preconditions satisfied, execute post conditions
         print("Conditions satisfied executing: " + this.actionName);
         for (int i = 0; i < postConditions.Count; i++) {
+            //change conditions
             postConditions[i].execute();
+            //invoke methods
+            TriggeredMethods.Invoke();
         }
 
         //ping the Narrative Node
@@ -95,6 +101,7 @@ public class Precondition {
 
     //check if precondition is satisfied
     public bool checkCondition() {
+        
         conditionList = GameObject.FindGameObjectWithTag("NarrativeController").GetComponent<ConditionList>();
 
         Predicate<ConditionList.Condition> condFinder = (ConditionList.Condition c) => { return c.conditionName == refrencedCondition.conditionName; };
@@ -152,6 +159,9 @@ public class Postcondition  {
 
 	//specified assignment
 	public AssignmentType assignmentType;
+
+    //array of UnityEvents
+
 
     public ConditionList conditionList;
 
