@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using OpenNLP.Tools.Tokenize;
+using Newtonsoft.Json;
 using System.IO;
 
 public class TextProcessor : MonoBehaviour {
@@ -28,9 +29,9 @@ public class TextProcessor : MonoBehaviour {
         //get data from json
         string jsonString = File.ReadAllText(streamPath);
 
-        TagDataBase dataBase = JsonUtility.FromJson<TagDataBase>(jsonString);
+        TagDataBase dataBase = JsonConvert.DeserializeObject<TagDataBase>(jsonString);
 
-        print(dataBase.dataBase[0].tag);
+        print(dataBase.dataBase[0].name);
 
 	}
 	
@@ -69,13 +70,7 @@ public class TextProcessor : MonoBehaviour {
     public class Tag
     {
         public int tagID;
-        public string tag;
-        public Information[] information;
-    }
-
-    [System.Serializable]
-    public class Information
-    {
-        public string s;
+        public string name;
+        public string[] information;
     }
 }
