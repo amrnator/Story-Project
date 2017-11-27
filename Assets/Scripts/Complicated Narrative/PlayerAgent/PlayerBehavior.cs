@@ -5,7 +5,8 @@ using TreeSharpPlus;
 using System;
 
 /// <summary>
-/// Behavior tree for player agent, while user can set certain actions for the player to take
+/// Behavior tree for player agent
+/// This class interacts with the PlayerActions
 /// </summary>
 public class PlayerBehavior : MonoBehaviour , IHasBehaviorObject{
 
@@ -161,7 +162,7 @@ public class PlayerBehavior : MonoBehaviour , IHasBehaviorObject{
             catch (System.Exception e)
             {
                 // this will occur if the target is unreacheable
-                //Debug.Log("Failed");
+                // Debug.Log("Failed");
                 return RunStatus.Failure;
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Player controller.
@@ -25,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 
 	bool isExploring = false;
 
-    
     void Start()
     {
 		// Get references
@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour {
                 SetFocus(hit.collider.GetComponent<InteractableObject>());
             }
         }
+
+       
 
     }
 

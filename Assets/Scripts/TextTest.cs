@@ -8,6 +8,7 @@ public class TextTest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         var modelPath = Application.dataPath +  "/packages/EnglishTok.nbin";
         var sentence = "- Sorry Mrs. Hudson, I'll skip the tea.";
         var tokenizer = new EnglishMaximumEntropyTokenizer(modelPath);

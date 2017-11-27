@@ -1,0 +1,9 @@
+{
+	"dataBase": [ 
+		{
+		"tagID" : 0,
+		"name": "Outcrop",
+		"information": ["Ford", "BMW", "Fiat"]
+		}
+	]
+}

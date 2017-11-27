@@ -57,8 +57,6 @@ public class PlayerActions : MonoBehaviour
         if (target != null)
         {
             //not exploring
-            
-
             MoveToPoint(target.position);
             navAgent.isStopped = false;
             
