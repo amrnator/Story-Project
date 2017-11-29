@@ -2,8 +2,27 @@
 	"dataBase": [ 
 		{
 		"tagID" : 0,
-		"name": "Outcrop",
-		"information": ["Ford", "BMW", "Fiat"]
+		"name": "Player",
+		"information": ["me", "I", "myself"]
+		},
+
+		{
+		"tagID" : 1,
+		"name": "Where",
+		"information": ["location", "where", "place"]
+		},
+
+		{
+		"tagID" : 2,
+		"name": "Interrogation",
+		"information": ["?", "I want to know", "what"]
+		},
+
+		{
+		"tagID" : 3,
+		"name": "Greeting",
+		"information": ["hello", "hi", "hey"]
 		}
+
 	]
 }
