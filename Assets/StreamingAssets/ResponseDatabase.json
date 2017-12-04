@@ -1,0 +1,9 @@
+{
+	"dataBase": [ 
+		{
+		"tagCombo": ["Greeting"],
+		"response" : "Hello there!",
+		"function" : "none"
+		}
+	]
+}

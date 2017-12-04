@@ -7,10 +7,13 @@ using OpenNLP.Tools.Tokenize;
 using Newtonsoft.Json;
 using System.IO;
 using System;
+using System.Linq;
 
 public class TextProcessor : MonoBehaviour {
 
     public TMP_InputField inputField;
+
+    PlayerController playerController;
 
     //path to NLP model
     string modelPath;
@@ -18,21 +21,33 @@ public class TextProcessor : MonoBehaviour {
     //path to streaming assets
     string streamPath;
 
+    //database of tags and associated words
     TagDataBase tagDataBase;
+
+    //database of tag combos and associated responses
+    ResponseDataBase responseDatabase;
 
 	// Use this for initialization
 	void Start () {
+
+        //get playerController
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
         //get path to nlp model
         modelPath = Application.dataPath + "/packages/EnglishTok.nbin";
 
         //get path to streaming assets
-        streamPath = Application.streamingAssetsPath + "/TagDatabase.json";
+        streamPath = Application.streamingAssetsPath;
 
-        //get data from json
-        String jsonString = File.ReadAllText(streamPath);
+        //get tagDatabase data from json
+        String jsonString = File.ReadAllText(streamPath + "/TagDatabase.json");
 
         tagDataBase = JsonConvert.DeserializeObject<TagDataBase>(jsonString);
+
+        //get ResponseDatabase
+        jsonString = File.ReadAllText(streamPath + "/ResponseDatabase.json");
+
+        responseDatabase = JsonConvert.DeserializeObject<ResponseDataBase>(jsonString);
 
         print(tagDataBase.dataBase[0].name);
     }
@@ -54,11 +69,15 @@ public class TextProcessor : MonoBehaviour {
         // spell check
 
         // match words and phrases to tags to create a tag combo
-        List<string> inputTags = ExtractTags(input);
+        List<String> inputTags = ExtractTags(input);
 
         // match input tags to actions in context
+        Response r = FindAction(inputTags);
+
+        print(r.response);
 
         // execute action
+        playerController.performResponse(r);
 
     }
 
@@ -76,7 +95,6 @@ public class TextProcessor : MonoBehaviour {
             print(x);
         }
 
-        //TODO implement this
         foreach (String x in tokens)
         {
             foreach (Tag dataTag in tagDataBase.dataBase)
@@ -103,10 +121,16 @@ public class TextProcessor : MonoBehaviour {
         return tags;
     }
 
-    //takes the input tags and selects an appropraite action from the context
-    private void FindAction(List<String> inputTags){
+    //takes the input tags and selects an appropraite action from the ResponseDatase
+    private Response FindAction(List<String> inputTags){
 
-        return;
+        foreach(Response r in responseDatabase.dataBase){
+            if (inputTags.SequenceEqual(r.tagCombo)){
+                return r;
+            }
+        }
+
+        return null;
     }
 
     [System.Serializable]
@@ -121,6 +145,20 @@ public class TextProcessor : MonoBehaviour {
         public int tagID;
         public string name;
         public String[] information;
+    }
+
+    [System.Serializable]
+    public class ResponseDataBase
+    {
+        public Response[] dataBase;
+    }
+
+    [System.Serializable]
+    public class Response
+    {
+        public String[] tagCombo;
+        public string response;
+        public string function;
     }
 
 }

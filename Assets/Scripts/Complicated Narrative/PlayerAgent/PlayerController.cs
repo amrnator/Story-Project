@@ -107,4 +107,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+    //perform a selected response
+    public void performResponse(TextProcessor.Response r){
+
+        //print response text
+        GameLog.Instance.post(r.response, Color.cyan);
+
+        //do selected function
+    }
 }

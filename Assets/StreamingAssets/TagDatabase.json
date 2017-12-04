@@ -22,7 +22,26 @@
 		"tagID" : 3,
 		"name": "Greeting",
 		"information": ["hello", "hi", "hey"]
+		},
+
+		{
+		"tagID" : 4,
+		"name": "Move",
+		"information": ["go", "move"]
+		},
+
+		{
+		"tagID" : 5,
+		"name": "To",
+		"information": ["to"]
+		},
+
+		{
+		"tagID" : 6,
+		"name": "Red",
+		"information": ["red"]
 		}
+
 
 	]
 }
